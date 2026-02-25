@@ -1,74 +1,37 @@
-import tkinter as tk
-from tkinter import messagebox
+# Simple Calculator Program
 
-# Main window
-root = tk.Tk()
-root.title("To-Do List Application")
-root.geometry("400x450")
-root.resizable(False, False)
+# Taking input from user
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
 
-# Functions
-def add_task():
-    task = entry.get()
-    if task != "":
-        listbox.insert(tk.END, task)
-        entry.delete(0, tk.END)
+# Displaying operation choices
+print("\nChoose operation:")
+print("1. Addition (+)")
+print("2. Subtraction (-)")
+print("3. Multiplication (*)")
+print("4. Division (/)")
+
+choice = input("Enter choice (1/2/3/4): ")
+
+# Performing calculation
+if choice == '1':
+    result = num1 + num2
+    print("Result =", result)
+
+elif choice == '2':
+    result = num1 - num2
+    print("Result =", result)
+
+elif choice == '3':
+    result = num1 * num2
+    print("Result =", result)
+
+elif choice == '4':
+    if num2 != 0:
+        result = num1 / num2
+        print("Result =", result)
     else:
-        messagebox.showwarning("Warning", "Please enter a task!")
+        print("Error! Division by zero is not allowed.")
 
-def delete_task():
-    try:
-        selected = listbox.curselection()[0]
-        listbox.delete(selected)
-    except:
-        messagebox.showwarning("Warning", "Please select a task to delete!")
-
-def update_task():
-    try:
-        selected = listbox.curselection()[0]
-        new_task = entry.get()
-        if new_task != "":
-            listbox.delete(selected)
-            listbox.insert(selected, new_task)
-            entry.delete(0, tk.END)
-        else:
-            messagebox.showwarning("Warning", "Enter updated task!")
-    except:
-        messagebox.showwarning("Warning", "Please select a task to update!")
-
-def mark_done():
-    try:
-        selected = listbox.curselection()[0]
-        task = listbox.get(selected)
-        listbox.delete(selected)
-        listbox.insert(tk.END, task + " ✔")
-    except:
-        messagebox.showwarning("Warning", "Please select a task!")
-
-# UI Components
-label = tk.Label(root, text="My To-Do List", font=("Arial", 18))
-label.pack(pady=10)
-
-entry = tk.Entry(root, width=30, font=("Arial", 12))
-entry.pack(pady=10)
-
-listbox = tk.Listbox(root, width=35, height=10, font=("Arial", 12))
-listbox.pack(pady=10)
-
-btn_frame = tk.Frame(root)
-btn_frame.pack(pady=10)
-
-add_btn = tk.Button(btn_frame, text="Add Task", width=12, command=add_task)
-add_btn.grid(row=0, column=0, padx=5)
-
-update_btn = tk.Button(btn_frame, text="Update Task", width=12, command=update_task)
-update_btn.grid(row=0, column=1, padx=5)
-
-delete_btn = tk.Button(btn_frame, text="Delete Task", width=12, command=delete_task)
-delete_btn.grid(row=1, column=0, padx=5, pady=5)
-
-done_btn = tk.Button(btn_frame, text="Mark Done", width=12, command=mark_done)
-done_btn.grid(row=1, column=1, padx=5, pady=5)
-
-# Run application
-root.mainloop()
+else:
+    print("Invalid choice! Please select 1, 2, 3, or 4.")
